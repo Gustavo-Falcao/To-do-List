@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Styles/global.css">
+    <title>To do List</title>
+</head>
+<body onload="messageForNoTasks()">
+    <header>
+        <h1>To do List</h1>
+    </header>
+    <main>
+        <section>
+            <h2>To do</h2>
+            <div class="box" id="box-todo">
+                <!-- <div class="card">
+                    <p>Nome tarefa</p>
+                </div>
+                <div class="card">
+                    <p>Nome tarefa</p>
+                </div> -->
+                <!-- <div class="card" id="idTaQuiiii">
+                    <p>Nome tarefa lorem</p>
+                    <span class="lixeira">🗑</span>
+                </div>  -->
+            </div>
+            <button onclick="inputTask()">Add +</button>
+        </section>
+        <section>
+            <h2>Doing</h2>
+            <div class="box" id="box-doing">
+                <div class="card">
+                    <p>Nome tarefa</p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>Done</h2>
+            <div class="box" id="box-done">
+                <div class="card">
+                    <p>Nome tarefa</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="janela-pai" class="janela-pai">
+        <span class="close" id="close" onclick="closeWidow()">&#x2715</span>
+        <div id="janela" class="janela">
+            <p>Digite o nome da tarefa</p>
+            <input type="text" name="tex-box" id="text-box" class="text-box">
+            <p>Digite um identificador para ela</p>
+            <input type="text" name="text-desc" id="text-desc" class="text-box">
+            <button onclick="submit()">Done</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
