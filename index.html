@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Styles/global.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=infoeditdelete" />
     <title>To do List</title>
 </head>
 <body onload="messageForNoTasks()">
@@ -20,10 +21,19 @@
                 <div class="card">
                     <p>Nome tarefa</p>
                 </div> -->
-                <!-- <div class="card" id="idTaQuiiii">
-                    <p>Nome tarefa lorem</p>
-                    <span class="lixeira">🗑</span>
-                </div>  -->
+                <div class="card" id="idTaQuiiii">
+                    <div class="sub-card">
+                        <p>Nome tarefa lorem</p>
+                        <span class="para-baixo">&#10095</span>
+                        <!-- <span class="lixeira">🗑</span> -->
+                    </div> 
+                    <div class="options">
+                        <span class="material-symbols-outlined info">info</span>
+                        <span class="material-symbols-outlined">edit</span>
+                        <span class="material-symbols-outlined">move_item</span>
+                        <span class="material-symbols-outlined">delete</span>
+                    </div>
+                </div>
             </div>
             <button onclick="inputTask()">Add +</button>
         </section>
@@ -48,10 +58,16 @@
     <div id="janela-pai" class="janela-pai">
         <span class="close" id="close" onclick="closeWidow()">&#x2715</span>
         <div id="janela" class="janela">
-            <p>Digite o nome da tarefa</p>
-            <input type="text" name="tex-box" id="text-box" class="text-box">
-            <p>Digite um identificador para ela</p>
-            <input type="text" name="text-desc" id="text-desc" class="text-box">
+            <div id="box-nome">
+                <p>Digite o nome da tarefa</p>
+                <input type="text" name="tex-box" id="text-box" class="text-box" placeholder="Nome">
+            </div>
+            
+            <div id="box-desc">
+                <p>Digite a descrição da tarefa</p>
+                <textarea id="text-desc" rows="15" cols="30" class="text-desc" placeholder="Descrição"></textarea>
+            </div>
+            
             <button onclick="submit()">Done</button>
         </div>
     </div>

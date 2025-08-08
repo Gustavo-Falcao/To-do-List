@@ -14,18 +14,53 @@ function submit() {
     } else {
         let hora = new Date
         let horaString = hora.getHours().toString() + hora.getMinutes().toString() + hora.getSeconds().toString()
+
+        //Criação do Card
         let card = document.createElement("div")
         card.setAttribute("class", "card")
         card.setAttribute("id", horaString)
         
+        //Criação do sub-card
+        let subCard = document.createElement("div")
+        subCard.setAttribute("class", "sub-card")
+
+        //Criação do Nome da tarefa
         let text = document.createElement("p")
         text.textContent = caixaTxt.value
-        card.appendChild(text)
+
+        //Criação da seta para baixo
+        let setaParaBaixo = document.createElement("span")
+        setaParaBaixo.setAttribute("class", "para-baixo")
+        setaParaBaixo.innerHTML = "&#10095"
         
-        let lixeira = document.createElement('span')
+        //Criação da caixa com as opções
+        let boxOptions = document.createElement("div")
+        boxOptions.setAttribute("class", "options")
+
+        //Criação do icone de info
+        let infoIcon = document.createElement("span")
+        infoIcon.setAttribute("class", "material-symbols-outlined info")
+        infoIcon.textContent = "info"
+
+        //Criação do icone de editar
+        let editIcon = document.createElement("span")
+        editIcon.setAttribute("class", "material-symbols-outlined")
+        editIcon.textContent = "edit"
+
+        //Criação do icone de mover item
+        let moveIcon = ocument.createElement("span")
+        moveIcon.setAttribute("class", "material-symbols-outlined")
+        moveIcon.textContent = "move_item"
+
+        //Criação do icone de deletar
+        let deleteIcon = ocument.createElement("span")
+        deleteIcon.setAttribute("class", "material-symbols-outlined")
+        deleteIcon.textContent = "delete"
+
+        /* let lixeira = document.createElement('span')
         lixeira.innerText = "🗑"
         lixeira.setAttribute("class", "lixeira")
-        card.appendChild(lixeira)
+        card.appendChild(lixeira) */
         
         let caixa = document.querySelector('#box-todo')
         caixa.appendChild(card)
@@ -89,3 +124,14 @@ function inputTask () {
     janela.classList.toggle('show-input')
 }   
 
+
+document.querySelector('.para-baixo').addEventListener('click', function(event) {
+    let elemento = event.target
+    elemento.classList.toggle('para-cima')
+
+    let card = elemento.closest('.card')
+    card.classList.toggle('expandir-card')
+
+    let option = card.querySelector('.options')
+    option.classList.toggle('mostrar-options')
+});
