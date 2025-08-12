@@ -1,6 +1,7 @@
 //let lixeiras = document.querySelectorAll('.lixeira')
 
-let lixeiras
+let icones
+let setaExpandirIcones
 
 function submit() {
     console.log("Clicadoo")
@@ -40,28 +41,23 @@ function submit() {
 
         //Criação do icone de info
         let infoIcon = document.createElement("span")
-        infoIcon.setAttribute("class", "material-symbols-outlined")
+        infoIcon.setAttribute("class", "material-symbols-outlined icones")
         infoIcon.textContent = "info"
 
         //Criação do icone de editar
         let editIcon = document.createElement("span")
-        editIcon.setAttribute("class", "material-symbols-outlined")
+        editIcon.setAttribute("class", "material-symbols-outlined icones")
         editIcon.textContent = "edit"
 
         //Criação do icone de mover item
         let moveIcon = document.createElement("span")
-        moveIcon.setAttribute("class", "material-symbols-outlined")
+        moveIcon.setAttribute("class", "material-symbols-outlined icones")
         moveIcon.textContent = "move_item"
 
         //Criação do icone de deletar
         let deleteIcon = document.createElement("span")
-        deleteIcon.setAttribute("class", "material-symbols-outlined")
+        deleteIcon.setAttribute("class", "material-symbols-outlined icones")
         deleteIcon.textContent = "delete"
-
-        /* let lixeira = document.createElement('span')
-        lixeira.innerText = "🗑"
-        lixeira.setAttribute("class", "lixeira")
-        card.appendChild(lixeira) */
         
         //Adicionando conteudos no subcard
         subCard.appendChild(text)
@@ -84,35 +80,59 @@ function submit() {
         messageForNoTasks()
         closeWidow()
 
-        lixeiras = document.querySelectorAll('.lixeira')
-        console.log("QUant => ", lixeiras.length)
+        icones = document.querySelectorAll('.icones')
+        console.log("QUant => ", icones.length)
 
         //Funcao para apagar o card
-        lixeiras.forEach(lixeira => {
-            lixeira.addEventListener('click', (element) => {
-                let infoLixeira = element.target
-                console.log("classe =>", infoLixeira.className)
-                let paiLixeira = infoLixeira.parentElement
-                let idPaiLixeira = paiLixeira.id
-                console.log("Id do pai=>", idPaiLixeira)
-                removeTask(idPaiLixeira)
+        icones.forEach(icone => {
+            icone.addEventListener('click', (element) => {
+                let infoIcone = element.target
+                console.log("classe =>", infoIcone.className)
+                console.log("Conteudo dentro => ", infoIcone.textContent)
+                let cardDoIcone = infoIcone.closest('.card')
+                let idCardIcone = cardDoIcone.id
+                console.log("Id do pai=>", idCardIcone)
+                //removeTask(idPaiIcone)
             });
         });
 
+
+        /* setaExpandirIcones = document.querySelectorAll('.para-baixo')
+        console.log("Quantidade Seta =>", setaExpandirIcones.length)
+
         //Mostrar opcoes do card
-        document.querySelector('.para-baixo').addEventListener('click', function(event) {
-        let elemento = event.target
-        elemento.classList.toggle('para-cima')
+        setaExpandirIcones.forEach(seta => {
+            seta.addEventListener('click', (event) => {
+                let elemento = event.target
+                elemento.classList.toggle('para-cima')
 
-        let card = elemento.closest('.card')
-        card.classList.toggle('expandir-card')
+                let card = elemento.closest('.card')
+                card.classList.toggle('expandir-card')
 
-        let option = card.querySelector('.options')
-        option.classList.toggle('mostrar-options')
-        });
+                let option = card.querySelector('.options')
+                option.classList.toggle('mostrar-options')
+            });
+        }); */
+        
 
     }
 }
+
+const caixaToDo = document.getElementById('box-todo')
+
+caixaToDo.addEventListener('click', function (event) {
+    if(event.target && event.target.classList.contains('para-baixo')) {
+        event.target.classList.toggle('para-cima')
+
+        let subCard = event.target.closest('.sub-card')
+        let option = subCard.nextElementSibling //previousElementeSibling - para pegar o elemento anterior no mesmo nivel
+        option.classList.toggle('mostrar-options')
+
+        let card = option.closest('.card')
+        card.classList.toggle('expandir-card')
+
+    }
+});
 
 function messageForNoTasks() {
     let tasksBoxes = document.querySelectorAll('.box')

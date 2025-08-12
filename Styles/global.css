@@ -44,6 +44,7 @@ h2 {
     align-items: center;
     padding: 30px;
     border-radius: 5px;
+    pointer-events: auto;
 }
 
 
@@ -199,12 +200,13 @@ p {
 .mostrar-options {
     transform: translateY(30px);
     opacity: 1;
+    pointer-events: auto;
 }
 
 .expandir-card {
     height: 70px;
 }
 
-.icones {
+span.material-symbols-outlined.icones:hover {
     cursor: pointer;
 }
