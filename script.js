@@ -3,6 +3,7 @@
 let lixeiras
 
 function submit() {
+    console.log("Clicadoo")
     let caixaTxt = document.querySelector('#text-box')
     let caixaDesc = document.querySelector('#text-desc')
     if(caixaTxt.value.length == 0 && caixaDesc.value.length == 0) {
@@ -39,7 +40,7 @@ function submit() {
 
         //Criação do icone de info
         let infoIcon = document.createElement("span")
-        infoIcon.setAttribute("class", "material-symbols-outlined info")
+        infoIcon.setAttribute("class", "material-symbols-outlined")
         infoIcon.textContent = "info"
 
         //Criação do icone de editar
@@ -48,12 +49,12 @@ function submit() {
         editIcon.textContent = "edit"
 
         //Criação do icone de mover item
-        let moveIcon = ocument.createElement("span")
+        let moveIcon = document.createElement("span")
         moveIcon.setAttribute("class", "material-symbols-outlined")
         moveIcon.textContent = "move_item"
 
         //Criação do icone de deletar
-        let deleteIcon = ocument.createElement("span")
+        let deleteIcon = document.createElement("span")
         deleteIcon.setAttribute("class", "material-symbols-outlined")
         deleteIcon.textContent = "delete"
 
@@ -62,6 +63,20 @@ function submit() {
         lixeira.setAttribute("class", "lixeira")
         card.appendChild(lixeira) */
         
+        //Adicionando conteudos no subcard
+        subCard.appendChild(text)
+        subCard.appendChild(setaParaBaixo)
+
+        //Adicionando icones nas opcoes
+        boxOptions.appendChild(infoIcon)
+        boxOptions.appendChild(editIcon)
+        boxOptions.appendChild(moveIcon)
+        boxOptions.appendChild(deleteIcon)
+
+        //Adicionando elementos no card
+        card.appendChild(subCard)
+        card.appendChild(boxOptions)
+
         let caixa = document.querySelector('#box-todo')
         caixa.appendChild(card)
         caixaTxt.value = ""
@@ -72,6 +87,7 @@ function submit() {
         lixeiras = document.querySelectorAll('.lixeira')
         console.log("QUant => ", lixeiras.length)
 
+        //Funcao para apagar o card
         lixeiras.forEach(lixeira => {
             lixeira.addEventListener('click', (element) => {
                 let infoLixeira = element.target
@@ -82,6 +98,19 @@ function submit() {
                 removeTask(idPaiLixeira)
             });
         });
+
+        //Mostrar opcoes do card
+        document.querySelector('.para-baixo').addEventListener('click', function(event) {
+        let elemento = event.target
+        elemento.classList.toggle('para-cima')
+
+        let card = elemento.closest('.card')
+        card.classList.toggle('expandir-card')
+
+        let option = card.querySelector('.options')
+        option.classList.toggle('mostrar-options')
+        });
+
     }
 }
 
@@ -124,14 +153,3 @@ function inputTask () {
     janela.classList.toggle('show-input')
 }   
 
-
-document.querySelector('.para-baixo').addEventListener('click', function(event) {
-    let elemento = event.target
-    elemento.classList.toggle('para-cima')
-
-    let card = elemento.closest('.card')
-    card.classList.toggle('expandir-card')
-
-    let option = card.querySelector('.options')
-    option.classList.toggle('mostrar-options')
-});

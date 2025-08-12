@@ -204,3 +204,7 @@ p {
 .expandir-card {
     height: 70px;
 }
+
+.icones {
+    cursor: pointer;
+}
