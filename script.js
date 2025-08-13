@@ -1,7 +1,14 @@
 //let lixeiras = document.querySelectorAll('.lixeira')
 
-let icones
-let setaExpandirIcones
+class Card {
+    constructor(ID, nome, conteudo) {
+        this.ID = ID;
+        this.nome = nome;
+        this.conteudo = conteudo;
+    }
+}
+
+let cards = []
 
 function submit() {
     console.log("Clicadoo")
@@ -29,6 +36,9 @@ function submit() {
         //Criação do Nome da tarefa
         let text = document.createElement("p")
         text.textContent = caixaTxt.value
+
+        //Criação do objeto Card
+        //cards = 
 
         //Criação da seta para baixo
         let setaParaBaixo = document.createElement("span")
@@ -80,21 +90,18 @@ function submit() {
         messageForNoTasks()
         closeWidow()
 
-        icones = document.querySelectorAll('.icones')
-        console.log("QUant => ", icones.length)
-
         //Funcao para apagar o card
-        icones.forEach(icone => {
-            icone.addEventListener('click', (element) => {
-                let infoIcone = element.target
-                console.log("classe =>", infoIcone.className)
-                console.log("Conteudo dentro => ", infoIcone.textContent)
-                let cardDoIcone = infoIcone.closest('.card')
-                let idCardIcone = cardDoIcone.id
-                console.log("Id do pai=>", idCardIcone)
-                //removeTask(idPaiIcone)
-            });
-        });
+        // icones.forEach(icone => {
+        //     icone.addEventListener('click', (element) => {
+        //         let infoIcone = element.target
+        //         console.log("classe =>", infoIcone.className)
+        //         console.log("Conteudo dentro => ", infoIcone.textContent)
+        //         let cardDoIcone = infoIcone.closest('.card')
+        //         let idCardIcone = cardDoIcone.id
+        //         console.log("Id do pai=>", idCardIcone)
+        //         removeTask(idPaiIcone)
+        //     });
+        // });
 
 
         /* setaExpandirIcones = document.querySelectorAll('.para-baixo')
@@ -121,19 +128,68 @@ function submit() {
 const caixaToDo = document.getElementById('box-todo')
 
 caixaToDo.addEventListener('click', function (event) {
-    if(event.target && event.target.classList.contains('para-baixo')) {
-        event.target.classList.toggle('para-cima')
+    let eventoClicado = event.target
+    if(eventoClicado) {
+       
+       let classeEvento = eventoClicado.className
+       console.log(`Nome classe => ${classeEvento}`)
 
-        let subCard = event.target.closest('.sub-card')
-        let option = subCard.nextElementSibling //previousElementeSibling - para pegar o elemento anterior no mesmo nivel
-        option.classList.toggle('mostrar-options')
-
-        let card = option.closest('.card')
-        card.classList.toggle('expandir-card')
-
+       if(eventoClicado.classList.contains('para-baixo')) {
+        //Expandir card e mostrar icones
+            mostrarIconesCard(eventoClicado)
+       }
+       else if(eventoClicado.classList.contains('icones')) {
+        //Remover card de acordo com o clic no icone da lixeira
+        let nomeElemento = eventoClicado.textContent
+        console.log(`Nome icone => ${nomeElemento}`)
+        switch(nomeElemento) {
+            case "delete":
+                removerElemento(eventoClicado)   
+            break
+            case "info":
+                mostrarInfoCard()
+            break
+            default: return
+        }
+        }  
     }
 });
 
+function mostrarInfoCard() {
+    let janelaInfo = document.getElementById('janela_info')
+    let janelaInput = janelaInfo.previousElementSibling
+    if(templateEstaSendoMostrado(janelaInput)) {
+        console.log("Janela do input está sendo mostrado")
+        esconderTemplate(janelaInput)
+    }
+    mostrarTemplate(janelaInfo)
+    mostrarJanelaModal()
+}
+
+//Mostrar icones do card
+function mostrarIconesCard(elemento) {
+    elemento.classList.toggle('para-cima')
+    
+    let subCard = elemento.closest('.sub-card')
+    let option = subCard.nextElementSibling //previousElementeSibling - para pegar o elemento anterior no mesmo nivel
+    option.classList.toggle('mostrar-options')
+
+    let card = option.closest('.card')
+    card.classList.toggle('expandir-card')
+}
+
+//Pega a informacao do card em qual o clic ocorreu e remove o card
+function removerElemento(elemento) {
+    let nomeIcone = elemento.textContent
+    console.log(`Nome do elemento => ${nomeIcone}`)
+    if(nomeIcone == "delete") {
+        let infoCard = elemento.closest('.card')
+        console.log(`Id do card => ${infoCard.id}`)
+        removeTask(infoCard.id)
+    } 
+}
+
+//Mostrar menssagem no campo se não tiver card
 function messageForNoTasks() {
     let tasksBoxes = document.querySelectorAll('.box')
     console.log('Quantidade das caixas => ' + tasksBoxes.length)
@@ -155,6 +211,7 @@ function messageForNoTasks() {
     });
 }
 
+//Remove um elemento pelo seu id
 function removeTask(idElement) {
    let elemento = document.getElementById(idElement)
    if(elemento) {
@@ -165,11 +222,35 @@ function removeTask(idElement) {
 
 function closeWidow() {
     let janelaMaior = document.querySelector('#janela-pai')           
-    janelaMaior.classList.remove('show-input')
+    janelaMaior.classList.remove('show-modal')
 }
 
-function inputTask () {
+function mostrarJanelaModal () {
     let janela = document.querySelector('#janela-pai')
-    janela.classList.toggle('show-input')
+    janela.classList.toggle('show-modal')
 }   
 
+function mostrarTemplate (elemento) {
+    elemento.classList.add('show-janela')
+}
+
+function esconderTemplate(elemento) {
+    elemento.classList.remove('show-janela')
+}
+
+function templateEstaSendoMostrado(elemento) {
+    return elemento.classList.contains('show-janela') ? true : false
+}
+
+document.getElementById('bot_addCard').addEventListener('click', function(e) {
+    let button = e.target
+    if(button) {
+        let janelaInput = document.getElementById('janela_input')
+        let janelaInfo = janelaInput.nextElementSibling
+        if(templateEstaSendoMostrado(janelaInfo)) {
+            esconderTemplate(janelaInfo)
+        }
+        mostrarTemplate(janelaInput)
+        mostrarJanelaModal()
+    }
+});

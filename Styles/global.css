@@ -88,6 +88,7 @@ button {
 
 p {
     text-align: justify;
+    font-size: 1.2em;
 }
 
 .msg {
@@ -130,13 +131,13 @@ p {
     display: none;
 }
 
-.janela {
+.janela_input {
     width: 30%;
     min-width: 400px;
     min-height: 500px;
     background-color: #373737d5;
     backdrop-filter: blur(6px);
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
@@ -147,16 +148,48 @@ p {
     padding: 10px;
 }
 
-.close {
+.janela_info {
+    width: 40%;
+    min-width: 500px;
+    min-height: 500px;
+    background-color: #373737d9;
+    backdrop-filter: blur(1px);
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    border-radius: 10px;
+    position: absolute;
+    top: 15%;
+    left: 28%;
+    padding: 20px;
+    h2{
+        width: 50%;
+        border-radius: 10px;
+    }
+}
+
+button.close {
     position: absolute;
     top: 4%;
     left: 68%;
     font-size: 1.5em;
     cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 50%;
 }
 
-.show-input {
+.show-modal {
     display: block;
+}
+
+.show-janela {
+    display: flex;
+}
+
+.hide-janela {
+    display: none;
 }
 
 .lixeira {
