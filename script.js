@@ -1,14 +1,14 @@
 //let lixeiras = document.querySelectorAll('.lixeira')
 
 class Card {
-    constructor(ID, nome, conteudo) {
-        this.ID = ID;
+    constructor(id, nome, conteudo) {
+        this.id = id;
         this.nome = nome;
         this.conteudo = conteudo;
     }
 }
 
-let cards = []
+let templates = []
 
 function submit() {
     console.log("Clicadoo")
@@ -38,8 +38,7 @@ function submit() {
         text.textContent = caixaTxt.value
 
         //Criação do objeto Card
-        //cards = 
-
+        templates.push(new Card(horaString, caixaTxt.value, caixaDesc.value))
         //Criação da seta para baixo
         let setaParaBaixo = document.createElement("span")
         setaParaBaixo.setAttribute("class", "para-baixo")
@@ -147,7 +146,7 @@ caixaToDo.addEventListener('click', function (event) {
                 removerElemento(eventoClicado)   
             break
             case "info":
-                mostrarInfoCard()
+                mostrarInfoCard(eventoClicado)
             break
             default: return
         }
@@ -155,13 +154,28 @@ caixaToDo.addEventListener('click', function (event) {
     }
 });
 
-function mostrarInfoCard() {
+function mostrarInfoCard(elemento) {
     let janelaInfo = document.getElementById('janela_info')
     let janelaInput = janelaInfo.previousElementSibling
     if(templateEstaSendoMostrado(janelaInput)) {
         console.log("Janela do input está sendo mostrado")
         esconderTemplate(janelaInput)
     }
+    let titulo = document.getElementById('titulo')
+    let conteudo = document.getElementById('conteudo')
+    let card = elemento.closest('.card')
+    let idCard = card.id
+    console.log(`Tamano templates => ${templates}`)
+
+    templates.forEach(t => {
+        if(t.id === idCard) {
+            titulo.textContent = t.nome
+            conteudo.textContent = t.conteudo
+            console.log(`Nome tarefa => ${t.nome}`)
+            console.log(`Conteudo tarefa => ${t.conteudo}`)
+        }
+    })
+    
     mostrarTemplate(janelaInfo)
     mostrarJanelaModal()
 }
