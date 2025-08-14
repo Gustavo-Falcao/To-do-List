@@ -13,7 +13,7 @@
     </header>
     <main>
         <section>
-            <h2>To do</h2>
+            <h2>Tasks</h2>
             <div class="box" id="box-todo">
                 <!-- <div class="card">
                     <p>Nome tarefa</p>
@@ -31,47 +31,41 @@
                         <span class="material-symbols-outlined">edit</span>
                         <span class="material-symbols-outlined">move_item</span>
                         <span class="material-symbols-outlined">delete</span>
+                        <span class="material-symbols-outlined">add</span>
                     </div>
                 </div> -->
             </div>
             <button id="bot_addCard">Add +</button>
         </section>
-        <section>
-            <h2>Doing</h2>
-            <div class="box" id="box-doing">
-                <div class="card">
-                    <p>Nome tarefa</p>
-                </div>
-            </div>
-        </section>
-        <section>
-            <h2>Done</h2>
-            <div class="box" id="box-done">
-                <div class="card">
-                    <p>Nome tarefa</p>
-                </div>
-            </div>
-        </section>
     </main>
 
     <div id="janela-pai" class="janela-pai">
         <button class="close" id="close" onclick="closeWidow()">&#x2715</button>
-        <div id="janela_input" class="janela_input">
-            <div id="box-nome">
-                <p>Digite o nome da tarefa</p>
-                <input type="text" name="tex-box" id="text-box" class="text-box" placeholder="Nome">
-            </div>
-            
-            <div id="box-desc">
-                <p>Digite a descrição da tarefa</p>
-                <textarea id="text-desc" rows="15" cols="30" class="text-desc" placeholder="Descrição"></textarea>
-            </div>
-            
-            <button onclick="submit()">Done</button>
+        <div id="janela_input" class="janela_input janela-pop">
+            <h2>Criar card</h2>
+            <form id="formulario">
+                <label>
+                    Nome tarefa:
+                    <input type="text" name="nome-tarefa" id="text-box" class="text-box" placeholder="Nome" autocomplete="off">
+                </label>
+                <!-- <label>
+                    Subtarefa:
+                    <input type="text" name="subtarefa" id="text-desc" placeholder="Subtarefa..." autocomplete="off">
+                </label> -->
+                <input type="submit" value="Criar">
+            </form>
+            <!-- <button onclick="submit()">Done</button> -->
         </div>
-        <div id="janela_info" class="janela_info">
+        <div id="janela_info" class="janela_info janela-pop">
             <h2 id="titulo">Nome da tarefa</h2>
             <p id="conteudo">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio at aliquam dolorem doloremque repudiandae nulla quidem suscipit optio cumque, pariatur laudantium natus dolorum architecto quam, deserunt ullam velit. Sint, cumque?</p>
+        </div>
+        <div id="janela_add" class="janela_add janela-pop">
+            <h2>Adicionar tarefas</h2>
+            <label>
+                <input type="text" name="add_tarefa" id="add_tarefa" placeholder="Digite a tarefa..." autocomplete="off">
+            </label>
+            <button>Adicionar</button>
         </div>
 
     </div>
