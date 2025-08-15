@@ -136,20 +136,6 @@ input[type="text"]:focus {
     left: 35%;
 }
 
-/* 
-background-color: #373737d9;
-backdrop-filter: blur(6px);
-display: none;
-flex-direction: column;
-position: absolute;
-border-radius: 10px;
-padding: 10px;
-h2{
-        width: 50%;
-        border-radius: 10px;
-    }
-*/
-
 .janela-pop {
     background-color: #373737d9;
     backdrop-filter: blur(6px);
@@ -161,6 +147,7 @@ h2{
     h2{
             width: 50%;
             border-radius: 10px;
+            margin-bottom: 15px;
     }
 }
 
@@ -179,10 +166,10 @@ h2{
     width: 30%;
     min-width: 500px;
     min-height: 300px;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    top: 15%;
-    left: 28%;
+    top: 11%;
+    left: 33%;
 }
 
 button.close {
@@ -277,4 +264,46 @@ input[type="submit"] {
     border-radius: 10px;
     font-size: 1em;
     cursor: pointer;
+}
+
+.box-tarefas {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+ul {
+  width: 100%;
+  list-style: none;
+  padding-inline-start: 0px;
+}
+
+ul li {
+    margin-bottom: 15px;
+}
+
+.tarefa {
+    padding: 20px;
+    width: 100%;
+    cursor: pointer;
+    display: block;
+    font-size: 1.1em;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.588);
+}
+
+.tarefa:hover {
+    background-color: #2e2e2e;
+}
+
+input[type="checkbox"] {
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+    padding: 5px;
+    margin-right: 20px;
+}
+
+.text_add_tarefa {
+    margin-bottom: 20px;
 }

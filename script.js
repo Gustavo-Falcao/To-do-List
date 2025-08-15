@@ -151,7 +151,7 @@ caixaToDo.addEventListener('click', function (event) {
             mostrarIconesCard(eventoClicado)
        }
        else if(eventoClicado.classList.contains('icones')) {
-        //Remover card de acordo com o clic no icone da lixeira
+        //Realizar acoes de acordo com o icone clicado
         let nomeElemento = eventoClicado.textContent
         console.log(`Nome icone => ${nomeElemento}`)
         switch(nomeElemento) {
@@ -162,36 +162,75 @@ caixaToDo.addEventListener('click', function (event) {
                 mostrarInfoCard(eventoClicado)
             break
             case "add":
-
+                addTarefas(eventoClicado)
             default: return
         }
         }  
     }
 });
 
-//Mostrar janela e esconder o restante
-function mostrarPopUp(elemento) {
-    let idElemento = elemento.id
-    let janelas = document.querySelectorAll('.janela-pop')
+//Adicionar tarefas
+function addTarefas(elemento) {
+    mostrarPopUp(elemento)
+    mostrarJanelaModal()
 
-    janelas.forEach(janela => {
-        if(janela.id !== idElemento) {
-            if(templateEstaSendoMostrado(janela)) {
-                esconderTemplate(janela)
-            }
+    let card = elemento.closest('.card')
+
+    let janelaAdd = document.getElementById('janela_add')
+
+    janelaAdd.addEventListener('click', function (e) {
+        let elementoClicado = e.target
+        let boxTarefas = janelaAdd.querySelector('#box_tarefas')
+        let paragrafo = boxTarefas.querySelector('#tarf')
+        if(elementoClicado.id === "bot_add_tarefa") {
+            let boxTextTarefa = janelaAdd.querySelector('#add_tarefa')
+            templates.forEach(t => {
+                if(t.id === card.id) {
+                    //t.conteudo.push(boxTextTarefa.value)
+                }
+            });
+            paragrafo.innerHTML += boxTextTarefa.value + "<br>"
+            boxTextTarefa.value = ""
         }
-    });
-
-    mostrarTemplate(elemento)
+    })
 }
 
-function mostrarInfoCard(elemento) {
-    let janelaInfo = document.getElementById('janela_info')
-    let janelaInput = janelaInfo.previousElementSibling
-    if(templateEstaSendoMostrado(janelaInput)) {
-        console.log("Janela do input está sendo mostrado")
-        esconderTemplate(janelaInput)
+//Mostrar janela e esconder o restante
+function mostrarPopUp(elemento) {
+    let nomeIcone = elemento.textContent
+    let janelas = document.querySelectorAll('.janela-pop')
+    console.log("Nome icone => ", nomeIcone)
+    switch(nomeIcone) {
+        case "info":
+            janelas.forEach(janela => {
+                console.log("Janela id => ", janela.id)
+                if(janela.id !== "janela_info") {
+                    console.log("Entrou na condicao")
+                    if(templateEstaSendoMostrado(janela)) {
+                        console.log(`A janela com o id [${janela.id}] está sendo mostrada`)
+                        esconderTemplate(janela)
+                    }
+                } else {
+                    mostrarTemplate(janela)
+                }
+            });
+        break;
+        case "add":
+            janelas.forEach(janela => {
+                if(janela.id !== "janela_add") {
+                    if(templateEstaSendoMostrado(janela)) {
+                        esconderTemplate(janela)
+                    }
+                } else {
+                    mostrarTemplate(janela)
+                }
+            })
+        break;
     }
+}
+
+//Mostra info e procura objeto card pelo id
+function mostrarInfoCard(elemento) {
     let titulo = document.getElementById('titulo')
     let conteudo = document.getElementById('conteudo')
     let card = elemento.closest('.card')
@@ -201,13 +240,12 @@ function mostrarInfoCard(elemento) {
     templates.forEach(t => {
         if(t.id === idCard) {
             titulo.textContent = t.nome
-            conteudo.textContent = t.conteudo
+            //conteudo.textContent = t.conteudo
             console.log(`Nome tarefa => ${t.nome}`)
             console.log(`Conteudo tarefa => ${t.conteudo}`)
         }
     })
-    
-    mostrarTemplate(janelaInfo)
+    mostrarPopUp(elemento)
     mostrarJanelaModal()
 }
 
@@ -272,14 +310,16 @@ function mostrarJanelaModal () {
 
 function mostrarTemplate (elemento) {
     elemento.classList.add('show-janela')
+    console.log("Adicionando classe ao elemento =>", elemento.id)
 }
 
 function esconderTemplate(elemento) {
     elemento.classList.remove('show-janela')
+    console.log("Removendo classe do elemento =>", elemento.id)
 }
 
 function templateEstaSendoMostrado(elemento) {
-    return elemento.classList.contains('show-janela') ? true : false
+    return elemento.classList.contains('show-janela') ? true : false;
 }
 
 //Adicionar card

@@ -62,10 +62,19 @@
         </div>
         <div id="janela_add" class="janela_add janela-pop">
             <h2>Adicionar tarefas</h2>
-            <label>
-                <input type="text" name="add_tarefa" id="add_tarefa" placeholder="Digite a tarefa..." autocomplete="off">
-            </label>
-            <button>Adicionar</button>
+            <div id="box_tarefas" class="box-tarefas">
+                <label class="text_add_tarefa">
+                    Tarefa:
+                    <input type="text" name="add_tarefa" id="add_tarefa" placeholder="Digite a tarefa..." autocomplete="off">
+                </label>
+                <ul role="list">
+                    <li><label class="tarefa" for="quarto"><input type="checkbox" id="quarto">Arrumar quarto</label></li>
+                    <li><label class="tarefa" for="cama"><input type="checkbox" id="cama">Arrumar cama</label></li>
+                    <li><label class="tarefa" for="mesa"><input type="checkbox" id="mesa">Arrumar mesa</label></li>
+                    <li><label class="tarefa" for="chao"><input type="checkbox" id="chao">Limpar chao</label></li>
+                </ul>
+            </div>
+            <button id="bot_add_tarefa">Adicionar</button>
         </div>
 
     </div>
